@@ -1,0 +1,67 @@
+//"Control.h"
+#pragma once
+
+void StartGame();	//hàm khởi tạo trò chơi
+void ExitGame();	//hàm thoát trò chơi
+
+//các hàm di chuyển trên màn hình
+void MoveRight();
+void MoveLeft();
+void MoveDown();
+void MoveUp();
+
+//"Control.cpp"
+#include "Control.h"
+#include "Model.h"
+#include "View.h"
+#include "Global.h"
+#include <stdlib.h>	//header của int system()
+
+void StartGame()
+{
+	system("cls");			//xóa trắng màn hình
+	ResetData();			//khởi tạo dữ liệu gốc
+	DrawBoard(BOARD_SIZE);	//vẽ màn hình trò chơi
+}
+
+void ExitGame()
+{
+	system("cls");
+	GabageCollect();
+	//Có thể lưu trò chơi trước khi thoát
+}
+
+void MoveRight()
+{
+	if (_X < _A[BOARD_SIZE - 1][BOARD_SIZE - 1].x)
+	{
+		_X += 4;
+		GotoXY(_X, _Y);
+	}
+}
+
+void MoveLeft() {
+	if (_X >_A[0][0].x)
+	{
+		_X -= 4;
+		GotoXY(_X, _Y);
+	}
+}
+
+void MoveDown()
+{
+	if (_Y < _A[BOARD_SIZE - 1][BOARD_SIZE - 1].y)
+	{
+		_Y += 2;
+		GotoXY(_X, _Y);
+	}
+}
+
+void MoveUp()
+{
+	if (_Y > _A[0][0].y)
+	{
+		_Y -= 2;
+		GotoXY(_X, _Y);
+	}
+}
